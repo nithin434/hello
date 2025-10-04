@@ -1,17 +1,13 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemap for 1 Minute Video Generation Agent
 Sitemap: https://16fps.com/sitemap.xml
 
-# Crawl-delay
+# Optimized crawl-delay for video generation content
 Crawl-delay: 1
 
-# Disallow specific paths (if any)
-# Disallow: /admin/
-# Disallow: /private/
-
-# Allow specific bots
+# Allow all major search engines for 1-minute video generation content
 User-agent: Googlebot
 Allow: /
 
@@ -20,3 +16,21 @@ Allow: /
 
 User-agent: Slurp
 Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Specific directives for video content indexing
+User-agent: *
+Allow: /demo
+Allow: /#features
+Allow: /#capabilities
+Allow: /#how-it-works
+Allow: /#what-can-it-do
+Allow: /#pricing
+
+# Host declaration for 1-minute video generation agent
+Host: https://16fps.com

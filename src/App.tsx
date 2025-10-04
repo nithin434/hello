@@ -97,7 +97,7 @@ function App() {
         <Navigation onNavigate={setCurrentPage} scrollToSection={scrollToSection} />
 
         {currentPage === 'home' ? (
-          <HomePage />
+          <HomePage onNavigate={setCurrentPage} />
         ) : (
           <DemoPage />
         )}
