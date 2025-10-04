@@ -1,23 +1,19 @@
 import HeroSection from './HeroSection';
 import DemoVideoSection from './DemoVideoSection';
+import WhatCanItDoSection from './WhatCanItDoSection';
+import HowItWorksSection from './HowItWorksSection';
 import FeaturesSection from './FeaturesSection';
-import ProcessSection from './ProcessSection';
-import UseCasesSection from './UseCasesSection';
 import ClosingSection from './ClosingSection';
 import RollingFooter from './RollingFooter';
 
-interface HomePageProps {
-  onNavigate: (page: 'demo') => void;
-}
-
-export default function HomePage({ onNavigate }: HomePageProps) {
+export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <DemoVideoSection onNavigate={onNavigate} />
+      <DemoVideoSection />
+      <WhatCanItDoSection />
+      <HowItWorksSection />
       <FeaturesSection />
-      <ProcessSection />
-      <UseCasesSection />
       <ClosingSection />
       <RollingFooter />
     </>

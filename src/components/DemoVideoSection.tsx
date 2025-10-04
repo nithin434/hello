@@ -1,66 +1,62 @@
 import { useEffect, useState } from 'react';
 
-interface DemoVideoSectionProps {
-  onNavigate: (page: 'demo') => void;
-}
-
-export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = ['/1.png', '/2.png', '/3.png', '/4.png', '/5.png', '/6.png'];
+export default function DemoVideoSection() {
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const videos = ['/demo1.webm', '/demo2.webm'];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
+      setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
+    }, 4000); // Changed to 4 seconds for videos
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [videos.length]);
 
   return (
-    <section className="py-32 px-8">
+    <section className="py-32 px-8" id="capabilities">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              Your Content, Perfected in Minutes
+              AI Video Generation Agent
             </h2>
             <p className="text-lg text-white/70 mb-8 leading-relaxed">
-              16fps transforms your ideas into polished, professional videos at scale. Whether you're building a brand, telling stories, or growing your audience, our AI-powered agent handles everything from creation to publishing.
+              Create up to 1-minute long videos with perfect consistency across different styles and frames. Our AI agent handles everything from generation to auto-scheduling, delivering professional results every time.
             </p>
 
             <div className="space-y-6 mb-10">
               <div className="flex items-start gap-4">
                 <div className="w-2 h-2 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></div>
                 <div>
-                  <h3 className="text-white font-semibold mb-1">Consistent Character Design</h3>
-                  <p className="text-white/60">Create once, use forever. Your character stays identical across every video.</p>
+                  <h3 className="text-white font-semibold mb-1">Up to 1 Minute Videos</h3>
+                  <p className="text-white/60">Generate extended content with perfect consistency from start to finish.</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
                 <div className="w-2 h-2 rounded-full bg-cyan-400 mt-2 flex-shrink-0"></div>
                 <div>
-                  <h3 className="text-white font-semibold mb-1">Smart Scheduling</h3>
-                  <p className="text-white/60">Set it and forget it. Our agent generates and posts content on your schedule.</p>
+                  <h3 className="text-white font-semibold mb-1">Multiple Styles & Frames</h3>
+                  <p className="text-white/60">Switch between different visual styles while maintaining character consistency.</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
                 <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 flex-shrink-0"></div>
                 <div>
-                  <h3 className="text-white font-semibold mb-1">Multi-Platform Ready</h3>
-                  <p className="text-white/60">Optimized for TikTok, Instagram Reels, YouTube Shorts, and more.</p>
+                  <h3 className="text-white font-semibold mb-1">Auto Scheduler & Publisher</h3>
+                  <p className="text-white/60">Set your schedule once and let the agent generate and post content automatically across all platforms.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-2 h-2 rounded-full bg-yellow-400 mt-2 flex-shrink-0"></div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">Frame-Perfect Consistency</h3>
+                  <p className="text-white/60">Same character, same quality, across every single frame and video generated.</p>
                 </div>
               </div>
             </div>
-
-            <button
-              onClick={() => onNavigate('demo')}
-              className="px-8 py-4 text-white border border-white/20 hover:border-white/40 hover:bg-white/5 transition-all duration-300 inline-flex items-center gap-2 font-medium"
-            >
-              See the Demo
-              <span>→</span>
-            </button>
           </div>
 
           <div className="relative">
@@ -69,26 +65,44 @@ export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) 
 
               <div className="relative bg-white/5 border border-white/10 overflow-hidden rounded-lg h-full">
                 <div className="relative h-full overflow-hidden">
-                  {images.map((img, index) => (
-                    <img
-                      key={img}
-                      src={img}
-                      alt={`Demo ${index + 1}`}
+                  {videos.map((video, index) => (
+                    <video
+                      key={video}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
                       className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                        index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                        index === currentVideoIndex ? 'opacity-100' : 'opacity-0'
                       }`}
-                    />
+                    >
+                      <source src={video} type="video/webm" />
+                      Your browser does not support the video tag.
+                    </video>
                   ))}
+                </div>
+
+                {/* Video Info Overlay */}
+                <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm rounded-lg px-3 py-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                    <span className="text-white text-sm">Demo {currentVideoIndex + 1}/2</span>
+                  </div>
+                </div>
+
+                {/* Auto-play indicator */}
+                <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1">
+                  <span className="text-white text-xs">AUTO</span>
                 </div>
               </div>
 
               <div className="flex justify-center gap-2 mt-6">
-                {images.map((_, index) => (
+                {videos.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentImageIndex(index)}
+                    onClick={() => setCurrentVideoIndex(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentImageIndex
+                      index === currentVideoIndex
                         ? 'bg-white w-8'
                         : 'bg-white/30 hover:bg-white/50'
                     }`}
