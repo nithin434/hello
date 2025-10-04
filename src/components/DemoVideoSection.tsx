@@ -6,7 +6,8 @@ export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) 
   return (
     <section className="py-32 px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden mb-8">
+        <div className="relative w-full max-w-sm mx-auto" style={{ aspectRatio: '9/16' }}>
+          <div className="absolute inset-0 bg-white/5 border border-white/10 overflow-hidden mb-8">
           <video
             autoPlay
             muted
@@ -16,9 +17,10 @@ export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) 
           >
             <source src="/demo-preview.mp4" type="video/mp4" />
           </video>
+          </div>
         </div>
 
-        <div className="text-center">
+        <div className="text-center mt-8">
           <p className="text-lg text-white/60 mb-6">
             See what 16fps creates. Every second counts.
           </p>

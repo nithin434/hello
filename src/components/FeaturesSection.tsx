@@ -5,17 +5,17 @@ export default function FeaturesSection() {
     {
       icon: Clock,
       title: '24/7 Agent',
-      description: 'Your video generator that never sleeps.',
+      description: 'Always ready to generate and schedule your content.',
     },
     {
       icon: Zap,
-      title: 'Auto Generate + Post',
-      description: 'From creation to publishing in one step.',
+      title: 'Auto-Generate & Post',
+      description: 'Create once, and let Syntexa handle publishing on your socials.',
     },
     {
       icon: Target,
       title: 'Consistency Engine',
-      description: 'The same character, style, and story across all your videos.',
+      description: 'Build your character once, and keep them across every video.',
     },
   ];
 
