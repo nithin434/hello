@@ -1,0 +1,7 @@
+Contact: mailto:security@syntexa.app
+Contact: mailto:developer@syntexa.app
+Expires: 2026-10-04T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://16fps.com/.well-known/security.txt
+Policy: https://16fps.com/security-policy
+Acknowledgments: https://16fps.com/security-acknowledgments
