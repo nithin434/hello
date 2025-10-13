@@ -12,6 +12,7 @@ export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) 
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const videos = ['/demo1.webm', '/demo2.webm'];
 
+  // Auto-rotate videos
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
@@ -20,11 +21,32 @@ export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) 
     return () => clearInterval(interval);
   }, [videos.length]);
 
-  // Update muted state when video changes or mute state changes
+  // Initialize first video on component mount
   useEffect(() => {
-    videoRefs.current.forEach((video) => {
+    const timer = setTimeout(() => {
+      if (videoRefs.current[0]) {
+        videoRefs.current[0].play().catch(() => {
+          // Handle autoplay restrictions gracefully
+        });
+      }
+    }, 100); // Small delay to ensure video is loaded
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Update muted state and control playback when video changes or mute state changes
+  useEffect(() => {
+    videoRefs.current.forEach((video, index) => {
       if (video) {
         video.muted = isMuted;
+        // Only play the current video, pause all others
+        if (index === currentVideoIndex) {
+          video.play().catch(() => {
+            // Handle autoplay restrictions gracefully
+          });
+        } else {
+          video.pause();
+        }
       }
     });
   }, [isMuted, currentVideoIndex]);
@@ -90,7 +112,6 @@ export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) 
                           videoRefs.current[index] = el;
                         }
                       }}
-                      autoPlay
                       muted={isMuted}
                       loop
                       playsInline
