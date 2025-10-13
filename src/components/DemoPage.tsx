@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Upload, Shuffle } from 'lucide-react';
+import { useAudio } from '../contexts/AudioContext';
 
 export default function DemoPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,6 +9,8 @@ export default function DemoPage() {
   const [currentPrompt, setCurrentPrompt] = useState('');
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
   const [hasGeneratedVideo, setHasGeneratedVideo] = useState(false);
+  const { isMuted } = useAudio();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const demoPrompts = [
     {
@@ -43,6 +46,13 @@ export default function DemoPage() {
     "Finalizing video..."
   ];
 
+  // Update video muted state when global mute state changes
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
+
   const handleRandomize = () => {
     const randomIndex = Math.floor(Math.random() * demoPrompts.length);
     setCurrentPrompt(demoPrompts[randomIndex].prompt);
@@ -71,7 +81,7 @@ export default function DemoPage() {
   }, []);
 
   const handleSubscribe = () => {
-    window.location.href = 'mailto:developer@syntexa.app?subject=16fps%20Demo%20Access%20Request&body=Hi%2C%0A%0AI%27d%20like%20to%20unlock%20full%20demo%20access.%0A%0AThank%20you.';
+    window.location.href = 'mailto:info@syntexa.app?subject=16fps%20Demo%20Access%20Request&body=Hi%2C%0A%0AI%27d%20like%20to%20unlock%20full%20demo%20access.%0A%0AThank%20you.';
   };
 
   return (
@@ -156,7 +166,7 @@ export default function DemoPage() {
           </div>
         )}
 
-        <div className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden mb-8 md:mb-12 rounded-xl">
+        <div className="relative w-full h-96 md:h-[500px] bg-white/5 border border-white/10 overflow-hidden mb-8 md:mb-12 rounded-xl flex items-center justify-center">
           {isLoading ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-8">
               <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-white/20 border-t-white rounded-full animate-spin mb-3 md:mb-4"></div>
@@ -180,12 +190,13 @@ export default function DemoPage() {
             </div>
           ) : hasGeneratedVideo ? (
             <video
+              ref={videoRef}
               key={demoPrompts[currentVideoIndex]?.video}
               autoPlay
-              muted
+              muted={isMuted}
               loop
               playsInline
-              className="w-full h-full object-cover"
+              className="max-w-full max-h-full object-contain"
             >
               <source src={demoPrompts[currentVideoIndex]?.video} type="video/webm" />
               Your browser does not support the video tag.

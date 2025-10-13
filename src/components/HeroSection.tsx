@@ -8,7 +8,7 @@ export default function HeroSection() {
     setIsLoading(true);
 
     setTimeout(() => {
-      window.location.href = 'mailto:developer@lumox.app?subject=16fps%20Agent%20Access%20Request&body=Hi%2C%0A%0AI%27m%20interested%20in%20using%20the%2016fps%20agent%20for%20my%20content%20creation.%0A%0ACould%20you%20please%20provide%20me%20with%20access%20details%20and%20pricing%20information%3F%0A%0AThank%20you.';
+      window.location.href = 'mailto:info@lumox.app?subject=16fps%20Agent%20Access%20Request&body=Hi%2C%0A%0AI%27m%20interested%20in%20using%20the%2016fps%20agent%20for%20my%20content%20creation.%0A%0ACould%20you%20please%20provide%20me%20with%20access%20details%20and%20pricing%20information%3F%0A%0AThank%20you.';
       setIsLoading(false);
     }, 4500);
   };

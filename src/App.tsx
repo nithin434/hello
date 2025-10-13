@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Navigation from './components/Navigation';
 import HomePage from './components/HomePage';
 import DemoPage from './components/DemoPage';
+import GlobalAudioControl from './components/GlobalAudioControl';
+import { AudioProvider } from './contexts/AudioContext';
 import useSEO from './hooks/useSEO';
 
 function App() {
@@ -48,7 +50,7 @@ function App() {
       "creator": {
         "@type": "Organization",
         "name": "Syntexa",
-        "email": "developer@syntexa.app"
+        "email": "info@syntexa.app"
       },
       "url": "https://16fps.com",
       "screenshot": "https://16fps.com/screenshot.jpg",
@@ -90,19 +92,22 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      <div className="fixed inset-0 bg-gradient-to-br from-emerald-950/20 via-black to-cyan-950/20 pointer-events-none"></div>
+    <AudioProvider>
+      <div className="min-h-screen bg-black relative overflow-hidden">
+        <div className="fixed inset-0 bg-gradient-to-br from-emerald-950/20 via-black to-cyan-950/20 pointer-events-none"></div>
 
-      <div className="relative z-10">
-        <Navigation onNavigate={setCurrentPage} scrollToSection={scrollToSection} />
+        <div className="relative z-10">
+          <Navigation onNavigate={setCurrentPage} scrollToSection={scrollToSection} />
+          <GlobalAudioControl />
 
-        {currentPage === 'home' ? (
-          <HomePage onNavigate={setCurrentPage} />
-        ) : (
-          <DemoPage />
-        )}
+          {currentPage === 'home' ? (
+            <HomePage onNavigate={setCurrentPage} />
+          ) : (
+            <DemoPage />
+          )}
+        </div>
       </div>
-    </div>
+    </AudioProvider>
   );
 }
 

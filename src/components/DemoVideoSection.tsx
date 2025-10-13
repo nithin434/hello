@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
+import { useAudio } from '../contexts/AudioContext';
 
 interface DemoVideoSectionProps {
   onNavigate?: (page: 'home' | 'demo') => void;
@@ -6,6 +8,8 @@ interface DemoVideoSectionProps {
 
 export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const { isMuted, toggleMute } = useAudio();
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const videos = ['/demo1.webm', '/demo2.webm'];
 
   useEffect(() => {
@@ -15,6 +19,15 @@ export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) 
 
     return () => clearInterval(interval);
   }, [videos.length]);
+
+  // Update muted state when video changes or mute state changes
+  useEffect(() => {
+    videoRefs.current.forEach((video) => {
+      if (video) {
+        video.muted = isMuted;
+      }
+    });
+  }, [isMuted, currentVideoIndex]);
 
   return (
     <section className="py-16 md:py-32 px-4 md:px-8" id="capabilities">
@@ -72,8 +85,13 @@ export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) 
                   {videos.map((video, index) => (
                     <video
                       key={video}
+                      ref={(el) => {
+                        if (el) {
+                          videoRefs.current[index] = el;
+                        }
+                      }}
                       autoPlay
-                      muted
+                      muted={isMuted}
                       loop
                       playsInline
                       className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
@@ -101,18 +119,32 @@ export default function DemoVideoSection({ onNavigate }: DemoVideoSectionProps) 
               </div>
 
               {/* Video Controls */}
-              <div className="flex justify-center gap-2 mt-4 md:mt-6">
-                {videos.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentVideoIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentVideoIndex
-                        ? 'bg-white w-6 md:w-8'
-                        : 'bg-white/30 hover:bg-white/50'
-                    }`}
-                  />
-                ))}
+              <div className="flex justify-center items-center gap-4 mt-4 md:mt-6">
+                <button
+                  onClick={toggleMute}
+                  className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 bg-black/20 hover:bg-black/30 rounded-full transition-colors backdrop-blur-sm"
+                  aria-label={isMuted ? 'Unmute' : 'Mute'}
+                >
+                  {isMuted ? (
+                    <VolumeX className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                  ) : (
+                    <Volume2 className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                  )}
+                </button>
+                
+                <div className="flex gap-2">
+                  {videos.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentVideoIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === currentVideoIndex
+                          ? 'bg-white w-6 md:w-8'
+                          : 'bg-white/30 hover:bg-white/50'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
 
               {/* Try it out button - Mobile positioned under video */}
