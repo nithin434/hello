@@ -50,7 +50,7 @@ function App() {
       "creator": {
         "@type": "Organization",
         "name": "Syntexa",
-        "email": "info@syntexa.app"
+        "email": "developer@syntexa.app"
       },
       "url": "https://16fps.com",
       "screenshot": "https://16fps.com/screenshot.jpg",

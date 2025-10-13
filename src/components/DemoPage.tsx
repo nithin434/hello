@@ -82,6 +82,7 @@ export default function DemoPage() {
 
   const handleSubscribe = () => {
     window.location.href = 'mailto:info@syntexa.app?subject=16fps%20Demo%20Access%20Request&body=Hi%2C%0A%0AI%27d%20like%20to%20unlock%20full%20demo%20access.%0A%0AThank%20you.';
+    window.location.href = 'mailto:info@syntexa.app?subject=16fps%20Demo%20Access%20Request&body=Hi%2C%0A%0AI%27d%20like%20to%20unlock%20full%20demo%20access.%0A%0AThank%20you.';
   };
 
   return (
