@@ -8,7 +8,7 @@ export default function ClosingSection() {
     setIsLoading(true);
 
     setTimeout(() => {
-      window.location.href = 'mailto:developer.lumox@gmail.com?subject=16fps%20Agent%20-%20Pricing%20Inquiry&body=Hi%2C%0A%0AI%27m%20interested%20in%20learning%20more%20about%20the%2016fps%20agent%20pricing.%0A%0ACould%20you%20please%20provide%20pricing%20information%20and%20available%20plans%3F%0A%0AThank%20you%21';
+      window.location.href = 'mailto:nithinjambula89@gmail.com?subject=16fps%20Agent%20-%20Pricing%20Inquiry&body=Hi%2C%0A%0AI%27m%20interested%20in%20learning%20more%20about%20the%2016fps%20agent%20pricing.%0A%0ACould%20you%20please%20provide%20pricing%20information%20and%20available%20plans%3F%0A%0AThank%20you%21';
       setIsLoading(false);
     }, 4000);
   };
@@ -63,10 +63,10 @@ export default function ClosingSection() {
             <p className="text-white/60 text-sm">
               Or manually email us at{' '}
               <a 
-                href="mailto:developer.lumox@gmail.com" 
+                href="mailto:nithinjambula89@gmail.com" 
                 className="text-white hover:text-white/80 underline transition-colors"
               >
-                developer.lumox@gmail.com
+                nithinjambula89@gmail.com
               </a>
             </p>
           </div>

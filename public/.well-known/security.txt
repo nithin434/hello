@@ -1,5 +1,5 @@
 Contact: mailto:security@syntexa.app
-Contact: mailto:developer.lumox@gmail.com
+Contact: mailto:nithinjambula89@gmail.com
 Expires: 2026-10-04T23:59:59.000Z
 Preferred-Languages: en
 Canonical: https://16fps.com/.well-known/security.txt
