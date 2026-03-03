@@ -3,6 +3,8 @@ import DemoVideoSection from './DemoVideoSection';
 import WhatCanItDoSection from './WhatCanItDoSection';
 import HowItWorksSection from './HowItWorksSection';
 import FeaturesSection from './FeaturesSection';
+import MarketIntelligenceSection from './MarketIntelligenceSection';
+import ComparisonSection from './ComparisonSection';
 import ClosingSection from './ClosingSection';
 import RollingFooter from './RollingFooter';
 
@@ -18,6 +20,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       <WhatCanItDoSection />
       <HowItWorksSection />
       <FeaturesSection />
+      <MarketIntelligenceSection />
+      <ComparisonSection />
       <ClosingSection />
       <RollingFooter />
     </>
