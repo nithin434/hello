@@ -72,24 +72,22 @@ export const useSEO = ({
     updateMetaTag('meta[name="revisit-after"]', 'name', '7 days');
     updateMetaTag('meta[name="distribution"]', 'name', 'global');
     updateMetaTag('meta[name="rating"]', 'name', 'general');
-    updateMetaTag('meta[name="cache-control"]', 'name', 'public, max-age=3600');
 
-    // Open Graph tags (social media)
+    // Open Graph tags
     if (ogTitle) updateMetaTag('meta[property="og:title"]', 'property', ogTitle);
     if (ogDescription) updateMetaTag('meta[property="og:description"]', 'property', ogDescription);
     if (ogImage) {
       updateMetaTag('meta[property="og:image"]', 'property', ogImage);
-      // Also set image type for better social sharing
       updateMetaTag('meta[property="og:image:type"]', 'property', 'image/jpeg');
     }
     if (ogUrl) updateMetaTag('meta[property="og:url"]', 'property', ogUrl);
     updateMetaTag('meta[property="og:site_name"]', 'property', '16fps');
     updateMetaTag('meta[property="og:type"]', 'property', 'website');
 
-    // LinkedIn specific tags
+    // LinkedIn tags
     updateMetaTag('meta[property="linkedin:url"]', 'property', ogUrl || 'https://16fps.com');
 
-    // Twitter Card tags
+    // Twitter tags
     if (twitterTitle) updateMetaTag('meta[property="twitter:title"]', 'property', twitterTitle);
     if (twitterDescription) updateMetaTag('meta[property="twitter:description"]', 'property', twitterDescription);
     if (twitterImage) updateMetaTag('meta[property="twitter:image"]', 'property', twitterImage);
@@ -111,7 +109,7 @@ export const useSEO = ({
       }
     }
 
-    // Structured Data (JSON-LD)
+    // Structured Data
     if (structuredData) {
       let structuredDataScript = document.querySelector('script[type="application/ld+json"]#dynamic-structured-data');
       if (structuredDataScript) {
@@ -124,32 +122,6 @@ export const useSEO = ({
         document.head.appendChild(structuredDataScript);
       }
     }
-
-    // BreadcrumbList structured data
-    const breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://16fps.com"
-        }
-      ]
-    };
-
-    let breadcrumbScript = document.querySelector('script[type="application/ld+json"]#breadcrumb-data');
-    if (breadcrumbScript) {
-      breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
-    } else {
-      breadcrumbScript = document.createElement('script');
-      breadcrumbScript.setAttribute('type', 'application/ld+json');
-      breadcrumbScript.setAttribute('id', 'breadcrumb-data');
-      breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
-      document.head.appendChild(breadcrumbScript);
-    }
-
   }, [title, description, keywords, ogTitle, ogDescription, ogImage, ogUrl, twitterTitle, twitterDescription, twitterImage, canonicalUrl, structuredData, author, robots, themeColor, locale]);
 };
 
