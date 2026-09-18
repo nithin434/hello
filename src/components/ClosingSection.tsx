@@ -63,10 +63,10 @@ export default function ClosingSection() {
             <p className="text-white/60 text-sm">
               Or manually email us at{' '}
               <a 
-                href="mailto:nithinjambula89@gmail.com" 
+                href="mailto:k.abhinav1890@gmail.com" 
                 className="text-white hover:text-white/80 underline transition-colors"
               >
-                nithinjambula89@gmail.com
+                k.abhinav1890@gmail.com
               </a>
             </p>
           </div>
